@@ -44,9 +44,10 @@ class MyAdapter(listMain:ArrayList<ListItem>, contextM:Context) : RecyclerView.A
         listArray.addAll(listItems)
         notifyDataSetChanged()
     }
-    fun removeItem(position: Int){
-        listArray.removeAt(position)
+    fun removeItem(pos: Int, dbManager: MyDbManager){
+        dbManager.removeItemFromDb(listArray[pos].id.toString())
+        listArray.removeAt(pos)
         notifyItemRangeChanged(0, listArray.size)
-        notifyItemRemoved(position)
+        notifyItemRemoved(pos)
     }
 }
