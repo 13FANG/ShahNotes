@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Разные цветовые ресурсы -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="lightGreen">#5BEC6E</color>
+    <color name="blueBG">#1A9AFF</color>
+    <color name="lightPink">#FF8080</color>
+    <color name="baseblue">#3D5DFF</color>
+    <color name="edGreen">#46B555</color>
+    <color name="edRed">#B54646</color>
 </resources>
