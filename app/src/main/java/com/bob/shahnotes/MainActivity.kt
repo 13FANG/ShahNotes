@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bob.shahnotes.databinding.ActivityMainBinding
 import com.bob.shahnotes.db.MyAdapter
 import com.bob.shahnotes.db.MyDbManager
 
 class MainActivity : AppCompatActivity() {
     val myDbManager = MyDbManager(this)
-    val myAdapter = MyAdapter(ArrayList())
+    val myAdapter = MyAdapter(ArrayList(), this)
     lateinit var bindingClass : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() = with(bindingClass)  {
         super.onResume()
         myDbManager.openDb()
-        val dataList = myDbManager.readDbData()
         fillAdapter()
     }
     override fun onDestroy() {
@@ -35,9 +35,12 @@ class MainActivity : AppCompatActivity() {
     }
     fun init() = with(bindingClass) {
         rcView.layoutManager = LinearLayoutManager(this@MainActivity)
-        rcView.adapter=myAdapter
+        rcView.adapter = myAdapter
     }
     fun fillAdapter() = with(bindingClass) {
-        myAdapter.updateAdapter(myDbManager.readDbData())
+        val list = myDbManager.readDbData()
+        myAdapter.updateAdapter(list)
+        if (list.size>0){ tvNoElements.visibility = View.GONE}
+        else {tvNoElements.visibility = View.VISIBLE}
     }
 }
